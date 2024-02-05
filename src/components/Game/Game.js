@@ -14,7 +14,7 @@ console.info({ answer });
 function Game() {
   const [guessData, setGuessData] = useState([]);
   return <>
-    <GuessResults guessData={guessData}/>
+    <GuessResults guessData={guessData} answer={answer}/>
     <Input setGuessData={setGuessData}/>
   </>;
 }
