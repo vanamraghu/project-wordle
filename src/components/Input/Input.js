@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
+import {NUM_OF_GUESSES_ALLOWED} from "../../constants";
 
-function Input({setGuessData}) {
-    const [guess, setGuess] = useState("")
+function Input({setGuessData, num, setNum, answer, guessData}) {
+    const [guess, setGuess] = useState("");
   return (
       <form className="guess-input-wrapper" onSubmit={(event) => {
           event.preventDefault();
@@ -11,10 +12,11 @@ function Input({setGuessData}) {
           }
           console.log(guessedValue);
           setGuessData((prev) => [...prev, guessedValue.guess])
+          setNum(prev => prev + 1);
           setGuess("");
       }}>
         <label htmlFor="guess-input">Enter guess:</label>
-        <input value={guess} id="guess-input"
+        <input disabled={NUM_OF_GUESSES_ALLOWED === num || guessData.includes(answer)} value={guess} id="guess-input"
                type="text"
                onChange={(event) => {
            const newValue = event.target.value;
