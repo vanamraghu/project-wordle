@@ -7,6 +7,7 @@ import GuessResults from "../GuessResults";
 import Guess from "../Guess";
 import {NUM_OF_GUESSES_ALLOWED} from "../../constants";
 import guess from "../Guess";
+import KeyBoard from "../KeyBoard";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -31,9 +32,8 @@ function Game() {
       </div> : NUM_OF_GUESSES_ALLOWED === num ? <div className="sad banner">
         <p>Sorry, the correct answer is <strong>{answer}</strong>.</p>
       </div> : null
-
     }
-
+    <KeyBoard guessData={guessData} answer={answer} num={num-1}/>
   </>;
 }
 
