@@ -18,22 +18,32 @@ function Game() {
 
   const [guessData, setGuessData] = useState([]);
   const [num, setNum] = useState(0);
+  const [correctAnswer, setCorrectAnswer] = useState(answer);
+
+  const resetAll = () => {
+    setGuessData([]);
+    setNum(0);
+    setCorrectAnswer(sample(WORDS));
+  }
 
   console.log("Guess data is & number is  ", guessData, num);
   return <>
-    <GuessResults guessData={guessData} answer={answer}/>
-    <Input setGuessData={setGuessData} num={num} setNum={setNum} answer={answer} guessData={guessData}/>
+    <GuessResults guessData={guessData} answer={correctAnswer}/>
+    <Input setGuessData={setGuessData} num={num} setNum={setNum} answer={correctAnswer} guessData={guessData}/>
     {
-      guessData.includes(answer) ? <div className="happy banner">
+      guessData.includes(correctAnswer) ?
+          <div className="happy banner">
         <p>
           <strong>Congratulations!</strong> Got it in
           <strong>{num} guesses</strong>.
         </p>
+            <button className={"btn"} onClick={resetAll}>RESTART BUTTON</button>
       </div> : NUM_OF_GUESSES_ALLOWED === num ? <div className="sad banner">
-        <p>Sorry, the correct answer is <strong>{answer}</strong>.</p>
-      </div> : null
+            <p>Sorry, the correct answer is <strong>{correctAnswer}</strong>.</p>
+            <button className={"btn"} onClick={resetAll}>RESTART BUTTON</button>
+          </div> : null
     }
-    <KeyBoard guessData={guessData} answer={answer} num={num-1}/>
+    <KeyBoard guessData={guessData} answer={correctAnswer} num={num-1}/>
   </>;
 }
 
